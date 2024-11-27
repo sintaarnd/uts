@@ -1,0 +1,62 @@
+//menu
+var tombolMenu = $(".tombol-menu");
+var menu = $("nav .menu ul");
+
+function klikMenu() {
+	tombolMenu.click(function() {
+		menu.toggle();
+	});
+	menu.click(function() {
+		menu.toggle();
+	})
+}
+
+$(document).ready(function () {
+	var width = $(window).width();
+	if(width < 990) {
+		klikMenu();
+	}
+})
+
+//check lebar
+$(window).resize(function () {
+    var width = $(window).width();
+    if (width > 989) {
+        menu.css("display", "block");
+        //display:block
+    } else {
+        menu.css("display", "none");
+    }
+    klikMenu();
+});
+
+//efek scroll 
+$(document).ready(function () {
+    var scroll_pos = 0;
+    $(document).scroll(function () {
+        scroll_pos = $(this).scrollTop();
+        if (scroll_pos > 0) {
+            $("nav").addClass("putih");
+            $("nav img.hitam").show();
+            $("nav img.putih").hide();
+        } else {
+            $("nav").removeClass("putih");
+            $("nav img.hitam").hide();
+            $("nav img.putih").show();
+        }
+    })
+});
+
+document.querySelectorAll('.read-more').forEach(button => {
+  button.addEventListener('click', function (e) {
+    e.preventDefault(); // mencegah link default
+    const hiddenContent = this.previousElementSibling.querySelector('.hidden-content');
+    if (hiddenContent.style.display === 'none' || hiddenContent.style.display === '') {
+      hiddenContent.style.display = 'inline';
+      this.textContent = 'Read less';
+    } else {
+      hiddenContent.style.display = 'none';
+      this.textContent = 'Read more';
+    }
+  });
+});
